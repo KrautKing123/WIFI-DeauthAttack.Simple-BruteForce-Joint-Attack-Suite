@@ -21,3 +21,5 @@ Usage of ./brufjasgen:
   -regex string
     	Regex pattern (e.g., [a-z]{3}[!%]{2})
 ```
+
+The `-perm-concurrency` parameter controls goroutine concurrency. The default value, `4`, is optimized for lower-spec machines. Feel free to modify this number to best fit your system's resources.
