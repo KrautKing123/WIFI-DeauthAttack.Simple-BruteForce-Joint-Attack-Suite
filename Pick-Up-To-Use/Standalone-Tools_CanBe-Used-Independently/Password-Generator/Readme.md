@@ -1,4 +1,7 @@
 This folder includes a basic password generator along with its source code. For users who prefer an out-of-the-box solution, you can run the brufjasgen executable directly. For those who are concerned about the security of the source code or wish to customize it, the source code is available for modification. However, it is not licensed for commercial use.
+> **Platform Compatibility Note**
+>
+> The `brufjasgen` executable is compiled for **x64 Linux** systems and has only been fully tested on an x64 Kali Linux machine. Users on **Windows** or **macOS** are advised to compile the application from the source code.
 
 To view the usage instructions, execute the following command:
 ```bash
