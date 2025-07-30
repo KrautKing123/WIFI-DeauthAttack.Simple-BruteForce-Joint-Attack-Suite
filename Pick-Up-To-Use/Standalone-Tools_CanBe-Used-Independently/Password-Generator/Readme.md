@@ -4,3 +4,18 @@ To view the usage instructions, execute the following command:
 ```bash
 ./brufjasgen -h
 ```
+$ ./brufjasgen -h
+
+Usage of ./brufjasgen:
+  -allow-char-repeat
+    	Allow character repetition in counts mode (default: false)
+  -counts string
+    	Counts pattern (e.g., a-z:3,!:1,%:1)
+  -max-len int
+    	Set maximum password length (default 15)
+  -out string
+    	Output file name (default "password_list.txt")
+  -perm-concurrency int
+    	Set max concurrent permutation goroutines in "no-repeat" mode (default 4)
+  -regex string
+    	Regex pattern (e.g., [a-z]{3}[!%]{2})
