@@ -6,8 +6,7 @@ This folder includes a basic password generator along with its source code. For 
 >
 > Although the `regex` mode offers some control, it lacks the flexibility for true social engineering patterns. Users with such needs should consider adapting the `countMode` logic in the source code to work with word-based units instead of character-based ones.
 
-> **Platform Compatibility Note**
->
+> [!WARNING]
 > The `brufjasgen` executable is compiled for **x64 Linux** systems and has only been fully tested on an x64 Kali Linux machine. Users on **Windows** or **macOS** are advised to compile the application from the source code.
 
 To view the usage instructions, execute the following command:
