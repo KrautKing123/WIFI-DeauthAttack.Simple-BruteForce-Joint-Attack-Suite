@@ -1,14 +1,10 @@
 This folder includes a basic password generator along with its source code. For users who prefer an out-of-the-box solution, you can run the brufjasgen executable directly. For those who are concerned about the security of the source code or wish to customize it, the source code is available for modification. However, it is not licensed for commercial use.
 
-### Tool Philosophy & Limitations
-
-*   **Primary Goal:** This tool is designed to generate large, random password files, intended as a powerful replacement for pre-made wordlists like `rockyou.txt` and `SecLists` commonly used in CTF competitions.
-
-*   **Important Distinction:** It is **not** a specialized generator for passwords tailored to social engineering attacks. The underlying mechanism is based on the permutation of individual random characters, not the combination of specific word phrases.
-
-*   **Regarding Regex Mode:** While you can use the tool's `regex` mode to achieve a degree of pattern-specific generation, its rigid foundation cannot handle complex, multi-layered permutations of different wordlists.
-
-*   **For Advanced Users (Social Engineering):** If you have advanced requirements for social engineering attacks, you are encouraged to examine the implementation of `countMode` in the source code. A potential path forward would be to adapt the core logic to handle entire word phrases as base units, instead of just individual characters.
+> **A Note on Social Engineering vs. Brute-Force**
+>
+> While `brufjasgen` aims to replace generic password lists (e.g., `rockyou.txt`) with massive, randomized password files for CTF scenarios, it should not be mistaken for a social engineering password generator. Its core logic is built on character-level permutations, not the complex combination of meaningful words or phrases.
+>
+> Although the `regex` mode offers some control, it lacks the flexibility for true social engineering patterns. Users with such needs should consider adapting the `countMode` logic in the source code to work with word-based units instead of character-based ones.
 
 > **Platform Compatibility Note**
 >
