@@ -8,6 +8,7 @@ This folder includes a basic password generator along with its source code. For 
 
 > [!WARNING]
 > The `brufjasgen` executable is compiled for **x64 Linux** systems and has only been fully tested on an x64 Kali Linux machine. Users on **Windows** or **macOS** are advised to compile the application from the source code.
+
 > [!NOTE]
 > **Disk Space Consideration**
 > A password file with hundreds of millions of entries can easily reach several gigabytes (GB) in size. Before running a large-scale task, please check your available disk space. It is also recommended to perform a small test run to estimate the potential output file size.
