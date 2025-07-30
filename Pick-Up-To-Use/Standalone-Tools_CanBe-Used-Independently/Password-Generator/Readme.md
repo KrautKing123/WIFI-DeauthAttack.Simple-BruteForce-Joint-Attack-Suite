@@ -19,4 +19,4 @@ Usage of ./brufjasgen:
   -perm-concurrency int
     	Set max concurrent permutation goroutines in "no-repeat" mode (default 4)
   -regex string
-    	Regex pattern (e.g., [a-z]{3}[!%]{2})``````
+    	Regex pattern (e.g., [a-z]{3}[!%]{2})
