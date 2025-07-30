@@ -36,3 +36,15 @@ Usage of ./brufjasgen:
 ```
 
 The `-perm-concurrency` parameter controls goroutine concurrency. The default value, `4`, is optimized for lower-spec machines. Feel free to modify this number to best fit your system's resources.
+
+
+
+### 初步使用：尝试正则表达式模式
+### Getting Started: Trying the Regex Mode
+
+```bash
+# ./brufjasgen -regex '[a-d]{5}|[e-h1-3]{6}' -out 'password.txt'
+Expected total passwords: 118673
+Progress: [████████████████████████████████████████] 100.00% (118673 / 118673)
+Finished writing 118673 passwords to password.txt
+Program finished.
