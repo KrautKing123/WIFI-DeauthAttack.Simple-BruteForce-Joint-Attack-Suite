@@ -2,7 +2,7 @@ This folder includes a basic password generator along with its source code. For 
 
 > **A Note on Social Engineering vs. Brute-Force**
 >
-> While `brufjasgen` aims to replace generic password lists (e.g., `rockyou.txt`) with massive, randomized password files for CTF scenarios, it should not be mistaken for a social engineering password generator. Its core logic is built on character-level permutations, not the complex combination of meaningful words or phrases.
+> While `brufjasgen` aims to replace generic password lists (e.g., `rockyou.txt` and `SecLists`) with massive, randomized password files for CTF scenarios, it should not be mistaken for a social engineering password generator. Its core logic is built on character-level permutations, not the complex combination of meaningful words or phrases.
 >
 > Although the `regex` mode offers some control, it lacks the flexibility for true social engineering patterns. Users with such needs should consider adapting the `countMode` logic in the source code to work with word-based units instead of character-based ones.
 
