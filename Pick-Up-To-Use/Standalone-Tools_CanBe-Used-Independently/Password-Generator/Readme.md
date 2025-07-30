@@ -2,7 +2,7 @@ This folder includes a basic password generator along with its source code. For 
 
 ### Tool Philosophy & Limitations
 
-*   **Primary Goal:** This tool is designed to generate large, random password files, intended as a powerful replacement for pre-made wordlists like `rockyou.txt` commonly used in CTF competitions.
+*   **Primary Goal:** This tool is designed to generate large, random password files, intended as a powerful replacement for pre-made wordlists like `rockyou.txt` and `SecLists` commonly used in CTF competitions.
 
 *   **Important Distinction:** It is **not** a specialized generator for passwords tailored to social engineering attacks. The underlying mechanism is based on the permutation of individual random characters, not the combination of specific word phrases.
 
