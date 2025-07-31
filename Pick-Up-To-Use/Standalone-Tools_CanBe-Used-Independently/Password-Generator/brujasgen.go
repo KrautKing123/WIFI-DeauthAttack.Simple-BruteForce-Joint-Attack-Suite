@@ -498,21 +498,21 @@ func main() {
 	if *regexPattern != "" {
 		var wasSet bool
 		// This code uses the flag.Visit function to process each flag explicitly set by the user on the command line.
-        // The mechanism of Visit is to iterate over an internal list generated after parsing the command line,
-        // which contains only the flags that the user actually provided. The anonymous function defined here is
-        // passed directly to Visit as a function argument. During the iteration, Visit invokes this function
-        // once for each flag in the list, passing a pointer to the current flag (f) as an argument.
-        flag.Visit(func(f *flag.Flag) {
-             if f.Name == "allow-char-repeat" {
-                 wasSet = true
-                }
-             })
+                // The mechanism of Visit is to iterate over an internal list generated after parsing the command line,
+        	// which contains only the flags that the user actually provided. The anonymous function defined here is
+        	// passed directly to Visit as a function argument. During the iteration, Visit invokes this function
+        	// once for each flag in the list, passing a pointer to the current flag (f) as an argument.
+        	flag.Visit(func(f *flag.Flag) {
+             	     if f.Name == "allow-char-repeat" {
+                        wasSet = true
+                	}
+             	})
 
-        if wasSet {
-           fmt.Fprintln(os.Stderr, "Error: The --allow-char-repeat flag is invalid and cannot be used with --regex mode.")
-           fmt.Fprintln(os.Stderr, "Hint: Character repetition rules must be defined within the regex pattern itself.")
-           os.Exit(1) 
-           }
+        	if wasSet {
+           	   fmt.Fprintln(os.Stderr, "Error: The --allow-char-repeat flag is invalid and cannot be used with --regex mode.")
+                   fmt.Fprintln(os.Stderr, "Hint: Character repetition rules must be defined within the regex pattern itself.")
+                   os.Exit(1) 
+                }
 		p := *regexPattern
 		re, err := syntax.Parse(p, syntax.Perl)
 		if err != nil {
