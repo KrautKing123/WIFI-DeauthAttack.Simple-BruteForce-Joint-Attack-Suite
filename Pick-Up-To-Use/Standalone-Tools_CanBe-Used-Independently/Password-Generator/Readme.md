@@ -67,7 +67,7 @@ bdabc
 bdabd
 bdaca
 bdacb
-bdacc
+bdacc <<<
 bdacd
 bdada
 bdadb
