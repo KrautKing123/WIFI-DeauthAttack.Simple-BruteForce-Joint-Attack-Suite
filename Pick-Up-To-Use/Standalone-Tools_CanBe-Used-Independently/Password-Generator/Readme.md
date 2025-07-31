@@ -121,7 +121,7 @@ mike1cb2
 mike1cb3
 ...
 ```
-## Note:
+> [!NOTE]:
 Although you might hope to use the `|` or `||` symbols to switch between specific phrases, the tool will simply split the entire match into two parts. Attempting to work around this by enclosing the phrases in square brackets `[]` is also ineffective; this will only cause it to pick a single character from the string, and can even lead to the comical result of the `|` symbol itself being treated as a character for selection.
 
 ### Regular Expressions for Special Characters
