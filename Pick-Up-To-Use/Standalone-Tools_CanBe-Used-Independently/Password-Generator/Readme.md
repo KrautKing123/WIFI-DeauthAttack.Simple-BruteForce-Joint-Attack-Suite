@@ -48,3 +48,27 @@ Expected total passwords: 118673
 Progress: [████████████████████████████████████████] 100.00% (118673 / 118673)
 Finished writing 118673 passwords to password.txt
 Program finished.
+
+
+### Example Output Preview
+
+The following is a snippet from a generated password file. The original image shows this list being searched in VIM for the term `bdacc`.
+
+```text
+...
+bcddd
+bdaaa
+bdaab
+bdaac
+bdaad
+bdaba
+bdabb
+bdabc
+bdabd
+bdaca
+bdacb
+bdacc
+bdacd
+bdada
+bdadb
+...
