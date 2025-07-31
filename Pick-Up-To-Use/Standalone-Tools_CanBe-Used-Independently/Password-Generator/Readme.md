@@ -48,7 +48,7 @@ Expected total passwords: 118673
 Progress: [████████████████████████████████████████] 100.00% (118673 / 118673)
 Finished writing 118673 passwords to password.txt
 Program finished.
-
+```
 
 ### Example Output Preview
 
