@@ -39,7 +39,7 @@ The `-perm-concurrency` parameter controls goroutine concurrency. The default va
 
 
 
-### Getting Started: Trying the Regex Mode
+## Getting Started: Trying the Regex Mode
 
 ```bash
 # ./brufjasgen -regex '[a-d]{5}|[e-h1-3]{6}' -out 'password.txt'
@@ -87,6 +87,6 @@ Now, please notice the entry `3g2eh1` in the output list. This password was gene
 ...
 ```
 Thus, the pattern `[e-h1-3]{6}` provides a way to achieve a **mixed-character effect** to some extent, combining different character classes within the output.
-### Regarding Specific Phrases
+## Regarding Specific Phrases
 
 Consider the following command:
