@@ -76,7 +76,7 @@ bdadb
 
 From this output, you can immediately tell that the `[a-d]{5}` part of the expression was matched. You will also notice that characters from the `a-d` set are repeated within the result `bdacc`. In fact, there is no specific option to control character repetition within the regex mode; it is always allowed by design. Actually, `regex` mode does not allow the `--allow-char-repeat` option to be used at all.
 ## Another Output Sample
-Now, please notice the entry `geh231` in the output list. This password was generated because the `[e-h1-3]{6}` branch of the regex pattern was matched.
+Now, please notice the entry `3g2eh1` in the output list. This password was generated because the `[e-h1-3]{6}` branch of the regex pattern was matched.
 ```text
 ...
 geh22g
