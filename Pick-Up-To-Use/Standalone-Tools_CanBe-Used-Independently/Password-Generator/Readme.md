@@ -106,3 +106,18 @@ ccb2john1cca
 ...
 ccb2mike1cca
 ...
+```
+While you might expect a different format, the **actual** results will appear as follows:
+
+```text
+...
+ccc3john
+cccajohn
+cccbjohn
+ccccjohn
+mike1cac
+mike1cb1
+mike1cb2
+mike1cb3
+...
+```
