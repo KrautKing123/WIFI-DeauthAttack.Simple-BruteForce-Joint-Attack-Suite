@@ -98,7 +98,7 @@ Progress: [███████████████████████
 Finished writing 2592 passwords to password.txt
 Program finished.
 ```
-You can expect to find results like the following in the output file:
+You might expect to find results like the following in the output file:
 
 ```text
 ...
