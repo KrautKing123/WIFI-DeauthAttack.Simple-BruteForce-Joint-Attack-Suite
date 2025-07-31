@@ -52,7 +52,7 @@ Program finished.
 
 ### Example Output Preview
 
-The following is a snippet from a generated password file. The original image shows this list being searched in VIM for the term `bdacc`.
+The following is a snippet from a generated password file. Please have a attention on the term `bdacc`.
 
 ```text
 ...
