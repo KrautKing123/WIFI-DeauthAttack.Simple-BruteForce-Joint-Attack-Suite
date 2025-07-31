@@ -90,3 +90,11 @@ Thus, the pattern `[e-h1-3]{6}` provides a way to achieve a **mixed-character ef
 ## Regarding Specific Phrases
 
 Consider the following command:
+```bash
+# ./brufjasgen -regex '[a-c1-3]{4}john|mike[a-c1-3]{4}' -out 'password.txt' 
+Expected total passwords: 2592
+Progress: [████████████████████████████████████████] 100.00% (2592 / 2592) 
+
+Finished writing 2592 passwords to password.txt
+Program finished.
+```
