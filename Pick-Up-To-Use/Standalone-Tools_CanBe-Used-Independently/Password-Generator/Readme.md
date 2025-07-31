@@ -72,3 +72,5 @@ bdacd
 bdada
 bdadb
 ...
+
+From this output, you can immediately tell that the `[a-d]{5}` part of the expression was matched. You will also notice that characters from the `a-d` set are repeated within the result `bdacc`. In fact, there is no specific option to control character repetition within the regex mode; it is always allowed by design.
