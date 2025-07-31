@@ -85,4 +85,5 @@ Now, please notice the entry `3g2eh1` in the output list. This password was gene
 3g2eh2
 3g2eh3
 ...
+```
 Thus, the pattern `[e-h1-3]{6}` provides a way to achieve a **mixed-character effect** to some extent, combining different character classes within the output.
