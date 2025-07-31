@@ -79,10 +79,9 @@ From this output, you can immediately tell that the `[a-d]{5}` part of the expre
 Now, please notice the entry `3g2eh1` in the output list. This password was generated because the `[e-h1-3]{6}` branch of the regex pattern was matched.
 ```text
 ...
-geh22g
-geh22h
-geh231  <<<
-geh232
-geh233
+3g2egg
+3g2egh
+3g2eh1  <<<
+3g2eh2
+3g2eh3
 ...
-```
