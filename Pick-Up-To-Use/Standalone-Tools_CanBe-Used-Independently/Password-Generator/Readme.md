@@ -39,7 +39,6 @@ The `-perm-concurrency` parameter controls goroutine concurrency. The default va
 
 
 
-### 初步使用：尝试正则表达式模式
 ### Getting Started: Trying the Regex Mode
 
 ```bash
