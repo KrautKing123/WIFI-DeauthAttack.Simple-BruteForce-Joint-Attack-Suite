@@ -272,6 +272,7 @@ grep -C 3 '^!-8A-a%$' password.txt
 !-8A%a-
 ```
 The program does not parse multiple merged ranges as you would expect. Instead, it parses them as **literal characters**. Furthermore, it includes the hyphen (`-`) character, which should not have been part of the intended character set. So, while you might find the resulting characters `!`, `%`, `8`, `A`, and `a` to be understandable, the remaining `-` characters are clearly the result of an incorrect parsing of the input `'0-26-8:3'`.
+What's worse, two completely identical sets of output are produced. The program itself does not check if a parsed character array contains duplicate characters (please see the `parseCharSet` function); this is not a mission that a tool designed for high efficiency and saving machine resources should undertake. Regarding the two identical `'!-8A-a%'` sets, the program simply mechanically assumes that the two literally identical `-` characters have different underlying anchored indexes, and ultimately generates two results that the program considers to be different but are, in fact, completely identical.
 
 
    
