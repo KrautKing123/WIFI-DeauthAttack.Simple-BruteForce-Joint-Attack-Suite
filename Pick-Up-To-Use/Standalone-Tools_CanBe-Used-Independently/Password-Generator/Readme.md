@@ -174,5 +174,18 @@ Allow me to present the results as a `paragraph`:
   The `-counts` mode is quite different. For instance, if I needed a mixed password with '3 numbers, 2 lowercase letters, and 1 `!` symbol', `-regex` falls short. `[0-9]{3}[a-z]{2}[!]{1}` is comical because its order is fixed, failing our need for a "mixed" result. `[0-9a-z!]{6}` is even more absurd, as it also fails the "specific quantity" requirement. The `-counts` mode, however, can accomplish this task effortlessly.
 
 Consider the following command:
+```bash
+# ./brufjasgen -counts '0-9:3,a-z:2,!:1' --allow-char-repeat -out 'password.txt' 
+Generating passwords with total length 6 based on counts: 0-9:3,a-z:2,!:1
+Expected total passwords: 40560000
+Starting 2 workers for password generation...
+Progress: [████████████████████████████████████████] 100.00% (40560000 / 40560000) 
+
+Finished writing 40560000 passwords to password.txt
+Program finished.
+
+# cat password.txt | grep '^3!bg44$'
+3!bg44
+```
 
 
