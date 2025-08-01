@@ -126,4 +126,12 @@ Although you might hope to use the `|` or `||` symbols to switch between specifi
 
 ### Regular Expressions for Special Characters
 Consider the following command:
+```bash
+# ./brufjasgen -regex '[!-^]' -out 'password.txt'  
+Expected total passwords: 62
+Progress: [████████████████████████████████████████] 100.00% (62 / 62) 
+
+Finished writing 62 passwords to password.txt
+Program finished.
+```
 
