@@ -155,3 +155,8 @@ Finished writing 26 passwords to password.txt
 Program finished.
 ```
 Allow me to present the results as a `paragraph`:
+```text
+! " # $ % & ' ( ) * + , - . /
+: ; < = > ? @
+[ \ ] ^
+```
