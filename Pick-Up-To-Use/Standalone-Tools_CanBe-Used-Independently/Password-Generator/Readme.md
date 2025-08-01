@@ -146,4 +146,11 @@ You've probably seen that the result contains more than just symbols; it's also 
 Because the code points for `0-9` and `A-Z` fall between `!` and `^` in the Unicode table, they are included in the generated output. To get *only* the special symbols you need, you must look up their specific code points and create a precise pattern that skips over the letters and numbers.
 
 **Here is a more precise method:**
+```bash
+# ./brufjasgen -regex '[!-/:-@[-^]' -out 'password.txt' 
+Expected total passwords: 26
+Progress: [████████████████████████████████████████] 100.00% (26 / 26) 
 
+Finished writing 26 passwords to password.txt
+Program finished.
+```
