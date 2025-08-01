@@ -168,4 +168,4 @@ Allow me to present the results as a `paragraph`:
 
 
 
-# countsMode
+# Into the `-counts` Mode...
