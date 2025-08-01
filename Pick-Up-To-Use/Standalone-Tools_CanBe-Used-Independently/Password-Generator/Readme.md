@@ -278,6 +278,11 @@ grep -C 3 '^!-8A-a%$' password.txt
 
 
 # Final Summary worth a attention...
+Since this tool generates massive random password files based on individual random characters, its scope of capabilities does not overlap with that of CTF competitions or real social engineering attacks. In other words, this tool can be considered a good complement for use cases such as:
+
+1.  A random Wi-Fi security test.
+2.  Brute-forcing SSH on a random edge machine.
+3.  Generating a massive random password file for secondary data cleansing and other uses.
 
 
 
