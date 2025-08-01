@@ -241,6 +241,19 @@ What's worth to take a look is that the `!-%`, it is parsed into `[!, ", #, $, %
 > [!WARNING]
 > ## The parse processing of `-counts` mode
 > You should **never** modify the previous command to look like this:
+```bash
+./brufjasgen -counts '0-26-8:3,a-cA-C:2,!-%:2' --allow-char-repeat=false -out 'password.txt'
+Generating passwords with total length 7 based on counts: 0-26-8:3,a-cA-C:2,!-%:2
+Expected total passwords: 15120000
+Progress: [████████████████████████████████████████] 100.00% (15120000 / 15120000) 
+
+Finished writing 15120000 passwords to password.txt
+Program finished.
+
+$ grep -C 4 '^7%B6#0a$' password.txt
+
+   ## literally nothing ##
+
 
 
    
