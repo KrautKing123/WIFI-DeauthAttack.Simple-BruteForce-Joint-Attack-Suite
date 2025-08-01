@@ -146,6 +146,8 @@ You've probably seen that the result contains more than just symbols; it's also 
 
 Because the code points for `0-9` and `A-Z` fall between `!` and `^` in the Unicode table, they are included in the generated output. To get *only* the special symbols you need, you must look up their specific code points and create a precise pattern that skips over the letters and numbers.
 
+In Unicode, the code point for `!` is 33 and for `^` is 94. This range includes the intervening numbers (48-57) and uppercase letters (65-90). Consequently, the generated output will be a mix of special characters, numbers, and letters. To get purely special characters, the range needs to be split by code points (e.g., `[!-/:-@[-^]`, which corresponds to code points 33-47, 58-64, and 91-94).
+
 **Here is a more precise method:**
 ```bash
  ./brufjasgen -regex '[!-/:-@[-^]' -out 'password.txt' 
