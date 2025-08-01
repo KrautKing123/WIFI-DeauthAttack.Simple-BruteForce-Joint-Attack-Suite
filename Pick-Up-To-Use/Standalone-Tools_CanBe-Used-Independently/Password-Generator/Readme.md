@@ -42,7 +42,7 @@ The `-perm-concurrency` parameter controls goroutine concurrency. The default va
 ## Getting Started: Trying the Regex Mode
 
 ```bash
-# ./brufjasgen -regex '[a-d]{5}|[e-h1-3]{6}' -out 'password.txt'
+ ./brufjasgen -regex '[a-d]{5}|[e-h1-3]{6}' -out 'password.txt'
 Expected total passwords: 118673
 Progress: [████████████████████████████████████████] 100.00% (118673 / 118673)
 Finished writing 118673 passwords to password.txt
@@ -92,7 +92,7 @@ Thus, the pattern `[e-h1-3]{6}` provides a way to achieve a **mixed-character ef
 
 Consider the following command:
 ```bash
-# ./brufjasgen -regex '[a-c1-3]{4}john|mike[a-c1-3]{4}' -out 'password.txt' 
+ ./brufjasgen -regex '[a-c1-3]{4}john|mike[a-c1-3]{4}' -out 'password.txt' 
 Expected total passwords: 2592
 Progress: [████████████████████████████████████████] 100.00% (2592 / 2592) 
 
@@ -128,7 +128,7 @@ Although you might hope to use the `|` or `||` symbols to switch between specifi
 ### Regular Expressions for Special Characters
 Consider the following command:
 ```bash
-# ./brufjasgen -regex '[!-^]' -out 'password.txt'  
+ ./brufjasgen -regex '[!-^]' -out 'password.txt'  
 Expected total passwords: 62
 Progress: [████████████████████████████████████████] 100.00% (62 / 62) 
 
@@ -148,7 +148,7 @@ Because the code points for `0-9` and `A-Z` fall between `!` and `^` in the Unic
 
 **Here is a more precise method:**
 ```bash
-# ./brufjasgen -regex '[!-/:-@[-^]' -out 'password.txt' 
+ ./brufjasgen -regex '[!-/:-@[-^]' -out 'password.txt' 
 Expected total passwords: 26
 Progress: [████████████████████████████████████████] 100.00% (26 / 26) 
 
@@ -175,7 +175,7 @@ Allow me to present the results as a `paragraph`:
 
 Consider the following command:
 ```bash
-# ./brufjasgen -counts '0-9:3,a-z:2,!:1' --allow-char-repeat -out 'password.txt' 
+ ./brufjasgen -counts '0-9:3,a-z:2,!:1' --allow-char-repeat -out 'password.txt' 
 Generating passwords with total length 6 based on counts: 0-9:3,a-z:2,!:1
 Expected total passwords: 40560000
 Starting 2 workers for password generation...
@@ -184,7 +184,7 @@ Progress: [███████████████████████
 Finished writing 40560000 passwords to password.txt
 Program finished.
 
-# grep -C 4 '^3!bg44$' password.txt 
+ grep -C 4 '^3!bg44$' password.txt 
 3!bg40
 3!bg41
 3!bg42
@@ -197,7 +197,7 @@ Program finished.
 ```
 Another key feature of the `-counts` mode is its ability to work in a "no-repeat" mode, ensuring unique characters in the output.
 ```bash
-# ./brufjasgen -counts '0-9:3,a-z:2,!:1' --allow-char-repeat=false -out 'password.txt'
+ ./brufjasgen -counts '0-9:3,a-z:2,!:1' --allow-char-repeat=false -out 'password.txt'
 Generating passwords with total length 6 based on counts: 0-9:3,a-z:2,!:1
 Expected total passwords: 28080000
 Progress: [████████████████████████████████████████] 100.00% (28080000 / 28080000) 
@@ -205,7 +205,7 @@ Progress: [███████████████████████
 Finished writing 28080000 passwords to password.txt
 Program finished.
 
-# grep '^3!bg4' password.txt | grep -C 4 '^3!bg45$' 
+ grep '^3!bg4' password.txt | grep -C 4 '^3!bg45$' 
 3!bg40
 3!bg41
 3!bg42
@@ -216,6 +216,34 @@ Program finished.
 3!bg49
 ```
 You will not find passwords like `3!bg43` and `3!bg44` in the results.
+## Some other usage of `-counts` mode...
+```bash
+./brufjasgen -counts '012678:3,abcABC:2,!-%:2' --allow-char-repeat=false -out 'password.txt'
+Generating passwords with total length 7 based on counts: 012678:3,abcABC:2,!-%:2
+Expected total passwords: 15120000
+Progress: [████████████████████████████████████████] 100.00% (15120000 / 15120000) 
+
+Finished writing 15120000 passwords to password.txt
+Program finished.
+
+grep -C 4 '^7%B6#0a$' password.txt 
+7%B#6a0
+7%B#60a
+7%B60#a
+7%B60a#
+7%B6#0a
+7%B6#a0
+7%B6a#0
+7%B6a0#
+7%#aB06
+```
+What's worth to take a look is that the `!-%`, it is parsed into `[!, ", #, $, %]`, as what we had a brief explantation on `unicode` table. That's the reason that why we see the `#` in the output results.
+> [!WARNING]
+> ## The parse processing of `-counts` mode
+> You should **never** modify the previous command to look like this:
+
+
+   
 
 
 
