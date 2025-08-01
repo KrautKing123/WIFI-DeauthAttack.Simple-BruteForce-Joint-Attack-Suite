@@ -239,7 +239,7 @@ grep -C 4 '^7%B6#0a$' password.txt
 7%B6a0#
 7%#aB06
 ```
-What's worth to take a look is that the `!-%`, it is parsed into `[!, ", #, $, %]`, as what we had a brief explantation on `unicode` table. That's the reason that why we see the `#` in the output results.
+What's worth to take a look is that the `!-%`, it is parsed into `[!, ", #, $, %]`, as what we had a brief explanation on `unicode` table. That's the reason that why we see the `#` in the output results.
 > [!WARNING]
 > ## The parse processing of `-counts` mode
 > You should **never** modify the previous command to look like this:
