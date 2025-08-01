@@ -134,4 +134,5 @@ Progress: [███████████████████████
 Finished writing 62 passwords to password.txt
 Program finished.
 ```
+For clarity, let me consolidate the results onto a single `Paragraph`:
 
