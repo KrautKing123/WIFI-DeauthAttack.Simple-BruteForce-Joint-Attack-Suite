@@ -169,3 +169,6 @@ Allow me to present the results as a `paragraph`:
 
 
 # Into the `-counts` Mode...
+  When you check the source code, you'll find that `counts` mode is the complement to `regex` mode. The key difference is that `regex` is about **fixed patterns and order**, while `counts` is about **permutations of a set quantity** of characters.
+
+  This distinction becomes clear with an example. Suppose you need a password with '3 numbers, 2 lowercase letters, and 1 `!` symbol', all mixed together. Trying to use `regex` for this is highly impractical. The pattern `[0-9]{3}[a-z]{2}[!]{1}` is laughable because it fixes the order. The pattern `[0-9a-z!]{6}` is even more ridiculous because it doesn't enforce the specific *counts* of each character type.
