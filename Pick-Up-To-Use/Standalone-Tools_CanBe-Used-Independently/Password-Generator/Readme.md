@@ -139,4 +139,9 @@ For clarity, let me consolidate the results onto a single `paragraph`:
 ! " # $ % & ' ( ) * + , - . / 0 1 2 3 4 5 6 7 8 9 : ; < = > ? @
  A B C D E F G H I J K L M N O P Q R S T U V W X Y Z [ \ ] ^
 ```
+### ⚠️ Important: How Regex Handles Character Ranges
+
+You've probably seen that the result contains more than just symbols; it's also mixed with numbers and letters. This is happening because the regex engine doesn't see character *types*. Instead, it processes ranges based on the **Unicode code point value** of each character.
+
+Because the code points for `0-9` and `A-Z` fall between `!` and `^` in the Unicode table, they are included in the generated output. To get *only* the special symbols you need, you must look up their specific code points and create a precise pattern that skips over the letters and numbers.
 
