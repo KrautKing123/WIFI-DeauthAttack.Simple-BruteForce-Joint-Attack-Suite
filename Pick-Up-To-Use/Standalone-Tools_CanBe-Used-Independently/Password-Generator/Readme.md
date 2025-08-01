@@ -167,4 +167,5 @@ Allow me to present the results as a `paragraph`:
 > As I've mentioned, when generating special characters, you **must** consult a Unicode code point table and enter a more precise regular expression. This is the only way to ensure you get the exact symbols you want without unintended characters.
 
 
-> # countsMode
+
+# countsMode
