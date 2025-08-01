@@ -184,8 +184,38 @@ Progress: [███████████████████████
 Finished writing 40560000 passwords to password.txt
 Program finished.
 
-# cat password.txt | grep '^3!bg44$'
+# grep -C 4 '^3!bg44$' password.txt 
+3!bg40
+3!bg41
+3!bg42
+3!bg43
 3!bg44
+3!bg45
+3!bg46
+3!bg47
+3!bg48
 ```
+Another key feature of the `-counts` mode is its ability to work in a "no-repeat" mode, ensuring unique characters in the output.
+```bash
+# ./brufjasgen -counts '0-9:3,a-z:2,!:1' --allow-char-repeat=false -out 'password.txt'
+Generating passwords with total length 6 based on counts: 0-9:3,a-z:2,!:1
+Expected total passwords: 28080000
+Progress: [████████████████████████████████████████] 100.00% (28080000 / 28080000) 
+
+Finished writing 28080000 passwords to password.txt
+Program finished.
+
+# grep '^3!bg4' password.txt | grep -C 4 '^3!bg45$' 
+3!bg40
+3!bg41
+3!bg42
+3!bg45
+3!bg48
+3!bg46
+3!bg47
+3!bg49
+```
+You will not find passwords like `3!bg43` and `3!bg44` in the results.
+
 
 
