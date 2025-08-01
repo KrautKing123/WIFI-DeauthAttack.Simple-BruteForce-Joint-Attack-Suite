@@ -144,5 +144,6 @@ For clarity, let me consolidate the results onto a single `paragraph`:
 You've probably seen that the result contains more than just symbols; it's also mixed with numbers and letters. This is happening because the regex engine doesn't see character *types*. Instead, it processes ranges based on the **Unicode code point value** of each character.
 
 Because the code points for `0-9` and `A-Z` fall between `!` and `^` in the Unicode table, they are included in the generated output. To get *only* the special symbols you need, you must look up their specific code points and create a precise pattern that skips over the letters and numbers.
+
 **Here is a more precise method:**
 
