@@ -283,7 +283,7 @@ Since this tool generates massive random password files based on individual rand
 1.  A random Wi-Fi security test.
 2.  Brute-forcing SSH on a random edge machine.
 3.  Generating a massive random password file for secondary data cleansing and other uses.
-[! NOTE]
+[!NOTE]
 You should **absolutely not** use this tool in online or offline CTF competitions. It will definitively fail to meet your needs for those scenarios. For that purpose, well-known lists like `rockyou.txt` and `SecLists` are far more suitable.
 
 
