@@ -277,6 +277,8 @@ grep -C 3 '^!-8A-a%$' password.txt
 
   What's worse, two completely identical sets of output are produced. The program itself does not check if a parsed character array contains duplicate characters (please see the `parseCharSet` function); this is not a mission that a tool designed for high efficiency and saving machine resources should undertake. Regarding the two identical `'!-8A-a%'` sets, the program simply mechanically assumes that the two literally identical `-` characters have different underlying anchored indexes, and ultimately generates two results that the program considers to be different but are, in fact, completely identical.
 
+  In `-counts` mode, the range must be a single, continuous range (e.g., `0-8` represents `0` to `8`, and `a-c` represents `a` to `c`). You cannot nest multiple hyphens, as in `0-26-8`. The tool will parse `0-26-8` as a sequence containing the characters `0`, `-`, `2`, `6`, `-`, `8`, which leads to unexpected results.
+
 
 
 # Final Summary worth a attention...
