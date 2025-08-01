@@ -250,10 +250,27 @@ Progress: [███████████████████████
 Finished writing 15120000 passwords to password.txt
 Program finished.
 
-$ grep -C 4 '^7%B6#0a$' password.txt
+grep -C 4 '^7%B6#0a$' password.txt
 
    ## literally nothing ##
 
+grep -C 3 '^!-8A-a%$' password.txt
+!-8a%A-
+!-8Aa-%
+!-8Aa%-
+!-8A-a%
+!-8A-%a
+!-8A%-a
+!-8A%a-
+--
+!-8a%A-
+!-8Aa-%
+!-8Aa%-
+!-8A-a%
+!-8A-%a
+!-8A%-a
+!-8A%a-
+```
 
 
    
