@@ -4,13 +4,12 @@ import (
 	"bufio"
 	"fmt"
 	"log"
-	// "math/rand" // 我们不再需要随机数了
+	"flag"
 	"os"
 	"runtime"
 	"sync"
 	"time"
 	"unicode"
-
 	"github.com/schollz/progressbar/v3"
 )
 
@@ -95,16 +94,19 @@ func main() {
     // ... main 函数的所有内容都和上一个最终版本完全相同 ...
 	// ... 它负责文件IO、进度条、启动并发流程 ...
 	// ... 它不需要知道过滤逻辑是如何改变的，这就是解耦的好处 ...
+	inputFile := flag.String("input-file", "password.txt", "input file name" )
+	outputFile := flag.String("output-file", "kept_passwords.txt", "output file name" )
+	flag.Parse()
 
-	const inputFile = "password.txt"
-	const outputFile = "kept_passwords.txt"
+	//const inputFile = "password.txt"
+	//const outputFile = "kept_passwords.txt"
 	numWorkers := runtime.NumCPU()
 
-	log.Printf("开始智能清洗任务: %s -> %s (使用 %d CPU核心)", inputFile, outputFile)
+	log.Printf("开始智能清洗任务: %s -> %s (使用 %d CPU核心)", *inputFile, *outputFile, numWorkers)
 
-	file, err := os.Open(inputFile)
+	file, err := os.Open(*inputFile)
 	if err != nil {
-		log.Fatalf("打开输入文件 '%s' 失败: %v", inputFile, err)
+		log.Fatalf("打开输入文件 '%s' 失败: %v", *inputFile, err)
 	}
 	defer file.Close()
 
@@ -114,9 +116,9 @@ func main() {
 	}
 	fileSize := fileInfo.Size()
 
-	outFile, err := os.Create(outputFile)
+	outFile, err := os.Create(*outputFile)
 	if err != nil {
-		log.Fatalf("创建输出文件 '%s' 失败: %v", outputFile, err)
+		log.Fatalf("创建输出文件 '%s' 失败: %v", *outputFile, err)
 	}
 	defer outFile.Close()
 	writer := bufio.NewWriter(outFile)
@@ -171,6 +173,6 @@ func main() {
 	discardedCount = totalLines - keptCount
 	log.Println("----------- 清洗完成 -----------")
 	log.Printf("总共处理了 %d 行。", totalLines)
-	log.Printf("保留并写入 %d 行到 '%s'。", keptCount, outputFile)
+	log.Printf("保留并写入 %d 行到 '%s'。", keptCount, *outputFile)
 	log.Printf("丢弃了 %d 行。", discardedCount)
 }
