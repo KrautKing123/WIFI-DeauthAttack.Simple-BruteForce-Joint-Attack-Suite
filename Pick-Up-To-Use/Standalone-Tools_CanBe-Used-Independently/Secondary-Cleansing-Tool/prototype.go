@@ -30,7 +30,26 @@ type ProcessedLine struct {
 	LetterIndices []IndexInfo
 	NumberIndices []IndexInfo
 	SymbolIndices []IndexInfo
+	LowerLetterIndices []IndexInfo
+	UpperLetterIndices []IndexInfo
 }
+
+type ProcessedLineLettercaseSensitive struct {
+	OriginalLine  string
+	LineNumber    int
+	LowerLetterIndices []IndexInfo
+	UpperLetterIndices []IndexInfo
+	NumberIndices []IndexInfo
+	SymbolIndices []IndexInfo
+}
+
+type TaskFunc func()
+
+dispatchMap := map[int]TaskFunc{
+		0: isCompact,
+		1: isCouple,
+		2: isEquallySpaced,
+	}
 
 // --- 新的全局过滤函数 ---
 
@@ -45,11 +64,15 @@ func isCompact(indices []IndexInfo) bool {
 }
 
 // shouldKeepLine 是我们的主过滤函数。
-func shouldKeepLine(letterIndices, numberIndices, symbolIndices []IndexInfo) bool {
+/**  func shouldKeepLine(letterIndices, numberIndices, symbolIndices []IndexInfo) bool {
 	return isCompact(letterIndices) &&
 		isCompact(numberIndices) &&
 		isCompact(symbolIndices)
-}
+}    **/
+
+func shouldKeepLine(lineStruct ProcessedLine, rulesInSlice [][]int) bool {
+
+     }
 
 // --- 并发工人函数 (已修改) ---
 func worker(id int, jobs <-chan Job, results chan<- ProcessedLine, wg *sync.WaitGroup) {
@@ -96,7 +119,34 @@ func main() {
 	// ... 它不需要知道过滤逻辑是如何改变的，这就是解耦的好处 ...
 	inputFile := flag.String("input-file", "password.txt", "input file name" )
 	outputFile := flag.String("output-file", "kept_passwords.txt", "output file name" )
+	filterRules := flag.String("filter-rules", "", "")
+	caseSensitive := flag.Bool("case-sensitive", false, "")
 	flag.Parse()
+
+	rulesInGroups := strings.Split(filterRules, ":")
+	if len(rulesInGroups) != 4 {
+		log.Fatalf("输入必须正好有4个由冒号分割的组，但检测到 %d 个", len(rulesInGroups))
+	   }
+    
+	rulesInSlice := make([][]int, 4)
+	// 4. 遍历这四个部分（即使部分是空字符串）
+	for i, part := range rulesInGroups {
+		// 为当前部分创建一个内层切片
+		// 如果 'part' 是空字符串，len(part)为0，循环不执行，innerSlice 保持为空
+		innerSlice := make([]int, 0, len(part))
+
+		for _, char := range part {
+			if char < '0' || char > '9' {
+				// 如果字符不是数字，返回错误
+				log.Fatalf("无效字符 '%c' 在组 '%s' 中", char, part)
+			}
+			// 将字符转换为整数并追加
+			innerSlice = append(innerSlice, int(char-'0'))
+		}
+		// 将（可能为空的）内层切片赋值给结果的相应位置
+		rulesInSlice[i] = innerSlice
+	}
+
 
 	//const inputFile = "password.txt"
 	//const outputFile = "kept_passwords.txt"
