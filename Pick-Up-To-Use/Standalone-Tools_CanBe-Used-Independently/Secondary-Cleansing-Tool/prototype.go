@@ -11,6 +11,7 @@ import (
 	"time"
 	"unicode"
 	"github.com/schollz/progressbar/v3"
+	"sort"
 )
 
 // --- 数据结构定义 (保持不变) ---
@@ -51,6 +52,8 @@ dispatchMap := map[int]TaskFunc{
 		2: isEquallySpaced,
 	}
 
+
+
 // --- 新的全局过滤函数 ---
 
 // isCompact 检查单个种类的索引是否是连续的。
@@ -70,12 +73,18 @@ func isCompact(indices []IndexInfo) bool {
 		isCompact(symbolIndices)
 }    **/
 
-func shouldKeepLine(lineStruct ProcessedLine, rulesInSlice [][]int) bool {
-
+func shouldKeepLine(lineStruct [][]IndexInfo, rulesInSlice [][]int) bool {
+	 if len(rulesInSlice) == 4 {
+	    for indexOfCharType, innerRulesSlice := range rulesInSlice {
+			for i = 0, i <= len(rulesInSlice), i++ {
+				
+				}
+		    }
+	    }
      }
 
 // --- 并发工人函数 (已修改) ---
-func worker(id int, jobs <-chan Job, results chan<- ProcessedLine, wg *sync.WaitGroup) {
+func worker(id int, jobs <-chan Job, results chan<- ProcessedLine, wg *sync.WaitGroup, caseSensitive bool, rulesInSlice [][]int) {
 	defer wg.Done()
 	// r := rand.New(...) // 我们不再需要随机数源了
 
@@ -83,22 +92,43 @@ func worker(id int, jobs <-chan Job, results chan<- ProcessedLine, wg *sync.Wait
 		// 索引分类逻辑 (保持不变)
 		lineLen := len(job.LineText)
 		letterIndices := make([]IndexInfo, 0, lineLen)
+		LowerLetterIndices := make([]IndexInfo, 0, lineLen)
+		UpperLetterIndices := make([]IndexInfo, 0, lineLen)
 		numberIndices := make([]IndexInfo, 0, lineLen)
 		symbolIndices := make([]IndexInfo, 0, lineLen)
 
 		for charIdx, char := range job.LineText {
 			info := IndexInfo{LineNumber: job.LineNumber, CharIndex: charIdx}
-			if unicode.IsLetter(char) {
-				letterIndices = append(letterIndices, info)
-			} else if unicode.IsNumber(char) {
-				numberIndices = append(numberIndices, info)
-			} else {
-				symbolIndices = append(symbolIndices, info)
+			switch {
+				case unicode.IsLetter(char):
+					 letterIndices = append(letterIndices, info)
+		    		 if unicode.IsLower(char) {
+				   		LowerLetterIndices = append(LowerLetterIndices, info)
+						} else if unicode.IsUpper(char) {
+							   UpperLetterIndices = append(UpperLetterIndices, info)
+					 }
+				case unicode.IsNumber(char):
+					 numberIndices = append(numberIndices, info)
+				default:
+					 symbolIndices = append(symbolIndices, info)
 			}
 		}
 
+		if caseSensitive == true {
+		   charIndices := make([][]IndexInfo, 0, 4)
+		   charIndices[0] = LowerLetterIndices
+		   charIndices[1] = UpperLetterIndices
+		   charIndices[2] = numberIndices
+		   charIndices[3] = symbolIndices
+		   } else if caseSensitive == false {
+				  charIndices := make([][]IndexInfo, 0, 3)
+		   		  charIndices[0] = letterIndices
+		   		  charIndices[1] = numberIndices
+		   		  charIndices[2] = symbolIndices
+		}
+
 		// --- 核心修改：使用新的智能过滤函数替换随机判断 ---
-		if shouldKeepLine(letterIndices, numberIndices, symbolIndices) {
+		if shouldKeepLine(charIndices, rulesInSlice) {
 			// 如果该行符合“紧凑”要求，则将其发送到结果通道
 			results <- ProcessedLine{
 				OriginalLine:  job.LineText,
@@ -112,8 +142,28 @@ func worker(id int, jobs <-chan Job, results chan<- ProcessedLine, wg *sync.Wait
 	}
 }
 
+func ContainsUsingBinarySearch(slice []int, target int) bool {
+	// 1. 创建一个原始切片的副本，以避免修改它
+	sliceCopy := make([]int, len(slice))
+	copy(sliceCopy, slice)
+
+	// 2. 对副本进行排序，这是二分查找的前提
+	sort.Ints(sliceCopy)
+
+	// 3. 使用 sort.SearchInts 进行二分查找
+	// 它返回目标值应该被插入的位置
+	index := sort.SearchInts(sliceCopy, target)
+
+	// 4. 进行双重检查并返回结果
+	// a) 检查索引是否在切片范围内
+	// b) 检查该索引上的值是否确实是我们的目标值
+	return index < len(sliceCopy) && sliceCopy[index] == target
+}
+
+
 // --- Main 函数 (无需修改) ---
 func main() {
+	RulesNumberAvailable := []int{0, 1, 2}
     // ... main 函数的所有内容都和上一个最终版本完全相同 ...
 	// ... 它负责文件IO、进度条、启动并发流程 ...
 	// ... 它不需要知道过滤逻辑是如何改变的，这就是解耦的好处 ...
@@ -145,6 +195,15 @@ func main() {
 		}
 		// 将（可能为空的）内层切片赋值给结果的相应位置
 		rulesInSlice[i] = innerSlice
+	}
+
+	for i, innerSlice := range rulesInSlice {
+	    for i, number := range innerSlice {
+		    if ContainsUsingBinarySearch(RulesNumberAvailable, number) == false {
+			   fmt.Printf("规则数字表达式中包含了非法数字%d\n", number)
+			   return 
+			   }
+		}
 	}
 
 
