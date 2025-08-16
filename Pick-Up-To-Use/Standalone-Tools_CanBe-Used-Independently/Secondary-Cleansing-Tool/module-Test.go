@@ -90,6 +90,11 @@ func main() {
 		{0, 1, 2},
 	}
 
-	shouldKeepLine(groups, rules)
-
+	if shouldKeepLine(groups, rules) 
+	   {
+        fmt.Printf("成功\n")
+	   } 
+	   else {
+		    fmt.Printf("失败\n")
+	   }
 }
