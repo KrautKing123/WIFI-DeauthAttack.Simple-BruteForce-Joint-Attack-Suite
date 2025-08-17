@@ -44,14 +44,13 @@ type ProcessedLineLettercaseSensitive struct {
 	SymbolIndices []IndexInfo
 }
 
-type TaskFunc func()
+type TaskFunc func([]IndexInfo) bool
 
-dispatchMap := map[int]TaskFunc{
-		0: isCompact,
-		1: isCouple,
-		2: isEquallySpaced,
-	}
-
+var dispatchMap = map[int]TaskFunc{
+	0: isCompact,
+	1: isCouple,
+	2: isEquallySpaced,
+}
 
 
 // --- 新的全局过滤函数 ---
@@ -74,13 +73,21 @@ func isCompact(indices []IndexInfo) bool {
 }    **/
 
 func shouldKeepLine(lineStruct [][]IndexInfo, rulesInSlice [][]int) bool {
-	 if len(rulesInSlice) == 4 {
 	    for indexOfCharType, innerRulesSlice := range rulesInSlice {
-			for i = 0, i <= len(rulesInSlice), i++ {
+			for i := 0; i <= len(innerRulesSlice); i++ {
 				
+				if i == len(innerRulesSlice) {
+				   fmt.Printf("当前范围内的规则全部不匹配, 强行退出\n")
+				   return false
+				   }
+				if dispatchMap[innerRulesSlice[i]](lineStruct[indexOfCharType]) == true {
+				   fmt.Printf("当前范围内的规则已匹配, 退出当前剩余规则循环, 进入下一级循环\n")
+				   break
+				   }				
 				}
 		    }
-	    }
+	    fmt.Printf("所有范围内的规则全部匹配, 运行成功\n")
+	    return true
      }
 
 // --- 并发工人函数 (已修改) ---
