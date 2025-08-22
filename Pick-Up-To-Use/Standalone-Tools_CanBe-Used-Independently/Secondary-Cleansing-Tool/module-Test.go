@@ -6,15 +6,16 @@ import (
 
 type TaskFunc func([]IndexInfo) bool
 
+type IndexInfo struct {
+	LineNumber int
+	CharIndex  int
+}
+
 var dispatchMap = map[int]TaskFunc{
 	0: isCompact,
 	1: isCouple,
 	2: isEquallySpaced,
-}
-
-type IndexInfo struct {
-	LineNumber int
-	CharIndex  int
+	3: isSymmetrical,
 }
 
 func isCompact(lineStruct []IndexInfo) bool {
@@ -46,17 +47,53 @@ func isCouple(lineStruct []IndexInfo) bool {
 }
 
 func isEquallySpaced(lineStruct []IndexInfo) bool {
-	var sum int = 0
-	for i := 0; i < len(lineStruct); i++ {
-		sum += lineStruct[i].CharIndex
+	actualLen := countNonEmptyStructs(lineStruct)
+	roundsToCount := actualLen - 1
+	startIndex := 0
+	for i := 0; i < roundsToCount; i += 2 {
+		spacedOne := lineStruct[startIndex+1].CharIndex - lineStruct[startIndex].CharIndex
+		spacedTwo := lineStruct[startIndex+2].CharIndex - lineStruct[startIndex+1].CharIndex
+		if spacedOne != spacedTwo {
+			return false
+		}
+		startIndex += 1
 	}
-	if sum%3 == 0 {
-		fmt.Printf("isEquallySpaced返回整除3\n")
+	return true
+}
+
+func countNonEmptyStructs(slice []IndexInfo) int {
+	var count int = 0
+	// 创建一个零值实例用于比较
+	var zeroInfo IndexInfo
+	// 你也可以直接写 if item == (IndexInfo{})
+
+	for _, item := range slice {
+		// 如果当前项不等于零值，我们就计数
+		if item != zeroInfo {
+			count++
+		}
+	}
+	return count
+}
+
+func isSymmetrical(lineStruct []IndexInfo) bool {
+	actualLen := countNonEmptyStructs(lineStruct)
+	lastIndex := actualLen - 1
+	roundsToCount := (actualLen / 2) + (actualLen % 2)
+	if roundsToCount == 1 {
 		return true
-	} else {
-		fmt.Printf("isEquallySpaced返回不能整除3\n")
-		return false
 	}
+	startIndex := 0
+	for i := 0; i < roundsToCount; i += 2 {
+		combinationOne := lineStruct[startIndex].CharIndex + lineStruct[lastIndex].CharIndex
+		combinationTwo := lineStruct[startIndex+1].CharIndex + lineStruct[lastIndex-1].CharIndex
+		if combinationOne != combinationTwo {
+			return false
+		}
+		startIndex += 1
+		lastIndex -= 1
+	}
+	return true
 }
 
 func shouldKeepLine(lineStruct [][]IndexInfo, rulesInSlice [][]int) bool {
@@ -80,21 +117,19 @@ func shouldKeepLine(lineStruct [][]IndexInfo, rulesInSlice [][]int) bool {
 func main() {
 	groups := [][]IndexInfo{
 		{{1, 1}, {1, 2}, {1, 3}},
-		{{1, 5}, {1, 8}},
-		{{1, 4}, {1, 6}, {1, 7}},
+		{{1, 4}, {1, 8}, {1, 12}, {1, 16}},
+		{{1, 4}, {1, 6}, {1, 8}, {1, 11}},
 	}
 
 	rules := [][]int{
-		{0, 2},
-		{1, 2},
-		{0, 1, 2},
+		{2},
+		{2},
+		{2},
 	}
 
-	if shouldKeepLine(groups, rules) 
-	   {
-        fmt.Printf("成功\n")
-	   } 
-	   else {
-		    fmt.Printf("失败\n")
-	   }
+	if shouldKeepLine(groups, rules) {
+		fmt.Printf("成功\n")
+	} else {
+		fmt.Printf("失败\n")
+	}
 }
