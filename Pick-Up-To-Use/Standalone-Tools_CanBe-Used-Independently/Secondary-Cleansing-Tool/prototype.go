@@ -126,21 +126,24 @@ func isSymmetrical(lineStruct []IndexInfo) bool {
 
 
 func shouldKeepLine(lineStruct [][]IndexInfo, rulesInSlice [][]int, rulesAvgIntInSlice []float64,  modeIndicator int) bool {
-	    for indexOfCharType, innerRulesSlice := range rulesInSlice {
-			for i := 0; i <= len(innerRulesSlice); i++ {
+	    if modeIndicator == 0 {
+		   for indexOfCharType, innerRulesSlice := range rulesInSlice {
+			   for i := 0; i <= len(innerRulesSlice); i++ {
 				
-				if i == len(innerRulesSlice) {
-				   fmt.Printf("当前范围内的规则全部不匹配, 强行退出\n")
-				   return false
+				   if i == len(innerRulesSlice) {
+				      fmt.Printf("当前范围内的规则全部不匹配, 强行退出\n")
+				      return false
+				      }
+				   if dispatchMap[innerRulesSlice[i]](lineStruct[indexOfCharType]) == true {
+				      fmt.Printf("当前范围内的规则已匹配, 退出当前剩余规则循环, 进入下一级循环\n")
+				      break
+				      }				
 				   }
-				if dispatchMap[innerRulesSlice[i]](lineStruct[indexOfCharType]) == true {
-				   fmt.Printf("当前范围内的规则已匹配, 退出当前剩余规则循环, 进入下一级循环\n")
-				   break
-				   }				
-				}
-		    }
-	    fmt.Printf("所有范围内的规则全部匹配, 运行成功\n")
-	    return true
+		       }
+	       fmt.Printf("所有范围内的规则全部匹配, 运行成功\n")
+	       return true
+		   } else if modeIndicator == 1 {
+			         }
      }
 
 // --- 并发工人函数 (已修改) ---
