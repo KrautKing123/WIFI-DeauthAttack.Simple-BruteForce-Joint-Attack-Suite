@@ -188,7 +188,7 @@ func worker(id int, jobs <-chan Job, results chan<- ProcessedLine, wg *sync.Wait
 		}
 
 		// --- 核心修改：使用新的智能过滤函数替换随机判断 ---
-		if shouldKeepLine(charIndices, rulesInSlice) {
+		if shouldKeepLine(charIndices, rulesInSlice, rulesAvgIntInSlice, modeIndicator) {
 			// 如果该行符合“紧凑”要求，则将其发送到结果通道
 			results <- ProcessedLine{
 				OriginalLine:  job.LineText,
