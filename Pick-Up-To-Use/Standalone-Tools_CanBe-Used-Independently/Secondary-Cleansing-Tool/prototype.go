@@ -144,7 +144,7 @@ func shouldKeepLine(lineStruct [][]IndexInfo, rulesInSlice [][]int, rulesAvgIntI
      }
 
 // --- 并发工人函数 (已修改) ---
-func worker(id int, jobs <-chan Job, results chan<- ProcessedLine, wg *sync.WaitGroup, caseSensitive bool,  rulesInSlice [][]int,  rulesAvgIntInSlice []float64,  modeIndicator int) {
+func worker(id int, jobs <-chan Job, results chan<- ProcessedLine, wg *sync.WaitGroup, caseSensitive bool,  rulesInSlice [][]int, rulesAvgIntInSlice []float64, modeIndicator int) {
 	defer wg.Done()
 	// r := rand.New(...) // 我们不再需要随机数源了
 
@@ -230,7 +230,7 @@ func main() {
 	inputFile := flag.String("input-file", "password.txt", "input file name" )
 	outputFile := flag.String("output-file", "kept_passwords.txt", "output file name" )
 	filterRules := flag.String("filter-rules", "", "")
-     avgIntRules := flag.String("avgInt-rules", "", "")
+    avgIntRules := flag.String("avgInt-rules", "", "")
 	caseSensitive := flag.Bool("case-sensitive", false, "")
 	flag.Parse()
 
@@ -277,24 +277,24 @@ func main() {
      rulesAvgIntInGroups := strings.Split(*avgIntRules, ":")
      rulesAvgIntInSlice := make([]float64, 3)
      if len(rulesAvgIntInGroups) == 3 {
-       for i, part := range rulesAvgIntInGroups {
-          avgIntInFloat, err := strconv.ParseFloat(part, 64)
-          if err != nil {
-            log.Fatalf("输入的规则数字限制出现格式错误, 程序退出")
-            } else {
-                   rulesAvgIntInSlice[i] = avgIntInFloat
-              }
-          }
+        for i, part := range rulesAvgIntInGroups {
+            avgIntInFloat, err := strconv.ParseFloat(part, 64)
+            if err != nil {
+               log.Fatalf("输入的规则数字限制出现格式错误, 程序退出")
+               } else {
+                      rulesAvgIntInSlice[i] = avgIntInFloat
+                 }
+            }
        } else {
-             log.Fatalf("你所提供的平均间隔数量限制的参数格式不符合要求")
-         }
+              log.Fatalf("你所提供的平均间隔数量限制的参数格式不符合要求")
+            }
    
      var filterMode int
      if *filterRules != "" && *avgIntRules == "" {
-       filterMode = 0
-       } else if *avgIntRules != "" && *filterRules == "" {
-             filterMode = 1
-             }
+        filterMode = 0
+        } else if *avgIntRules != "" && *filterRules == "" {
+               filterMode = 1
+               }
      
                 
           
