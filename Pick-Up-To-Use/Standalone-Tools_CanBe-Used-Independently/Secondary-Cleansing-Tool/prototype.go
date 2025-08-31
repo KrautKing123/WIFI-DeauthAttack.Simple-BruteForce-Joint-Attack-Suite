@@ -277,10 +277,10 @@ func main() {
 			   }
 		}
 	}
-     rulesAvgIntInGroups := strings.Split(*avgIntRules, ":")
-     rulesAvgIntInSlice := make([]float64, 3)
-     if len(rulesAvgIntInGroups) == 3 {
-        for i, part := range rulesAvgIntInGroups {
+    rulesAvgIntInGroups := strings.Split(*avgIntRules, ":")
+    rulesAvgIntInSlice := make([]float64, 3)
+    if len(rulesAvgIntInGroups) == 3 {
+       for i, part := range rulesAvgIntInGroups {
             avgIntInFloat, err := strconv.ParseFloat(part, 64)
             if err != nil {
                log.Fatalf("输入的规则数字限制出现格式错误, 程序退出")
